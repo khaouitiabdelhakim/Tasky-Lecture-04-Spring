@@ -33,7 +33,7 @@ public class Task {
         this.text = text;
     }
 
-    public boolean isCompleted() {
+    public boolean getCompleted() {
         return completed;
     }
 
