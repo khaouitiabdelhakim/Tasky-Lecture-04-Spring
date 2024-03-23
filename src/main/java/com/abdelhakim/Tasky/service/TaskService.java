@@ -2,6 +2,7 @@ package com.abdelhakim.Tasky.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.abdelhakim.Tasky.model.Task;
@@ -10,6 +11,7 @@ import com.abdelhakim.Tasky.repository.TaskRepository;
 @Service
 public class TaskService {
     
+    @Autowired
     private TaskRepository taskRepository;
 
     public List<Task> getAllTasks() {

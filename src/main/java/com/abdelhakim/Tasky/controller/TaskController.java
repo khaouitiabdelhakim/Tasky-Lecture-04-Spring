@@ -3,6 +3,7 @@ package com.abdelhakim.Tasky.controller;
 import com.abdelhakim.Tasky.model.Task;
 import com.abdelhakim.Tasky.service.TaskService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @RequestMapping("/api/tasks")
 public class TaskController {
 
+    @Autowired
     private TaskService taskService;
 
     @GetMapping("/all")
