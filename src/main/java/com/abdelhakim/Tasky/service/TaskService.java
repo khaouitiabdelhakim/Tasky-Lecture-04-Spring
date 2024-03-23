@@ -27,6 +27,7 @@ public class TaskService {
             Task taskToUpdate = taskRepository.findById(id).get();
             taskToUpdate.setText(task.getText());
             taskToUpdate.setCompleted(task.getCompleted());
+            taskRepository.save(task);
             return taskToUpdate;
         } else {
             return null;
