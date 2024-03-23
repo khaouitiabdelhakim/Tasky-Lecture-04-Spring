@@ -13,8 +13,9 @@ public class Task {
     private String text;
     private boolean completed;
 
-    public Task() {
-        // Default constructor required by JPA
+    public Task(String text, boolean completed) {
+        this.text = text;
+        this.completed = completed;
     }
 
     public Long getId() {
