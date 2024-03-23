@@ -1,8 +1,8 @@
 package com.abdelhakim.Tasky.controller;
 
 import com.abdelhakim.Tasky.model.Task;
-import com.abdelhakim.Tasky.service.TaskRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.abdelhakim.Tasky.service.TaskService;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,33 +12,26 @@ import java.util.List;
 @RequestMapping("/api/tasks")
 public class TaskController {
 
-    @Autowired
-    private TaskRepository taskRepository;
+    private TaskService taskService;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Task> getAllTasks() {
-        return taskRepository.findAll();
+        return taskService.getAllTasks();
     }
 
-    @PostMapping
+    @PostMapping("/new")
     public Task createTask(@RequestBody Task task) {
-        return taskRepository.save(task);
+        return taskService.createTask(task);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public Task updateTask(@PathVariable Long id, @RequestBody Task task) {
-        Task existingTask = taskRepository.findById(id).orElse(null);
-        if (existingTask != null) {
-            existingTask.setText(task.getText());
-            existingTask.setCompleted(task.isCompleted());
-            return taskRepository.save(existingTask);
-        }
-        return null;
+        return taskService.updateTask(id, task);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteTask(@PathVariable Long id) {
-        taskRepository.deleteById(id);
+        taskService.deleteTask(id);
     }
 }
 
