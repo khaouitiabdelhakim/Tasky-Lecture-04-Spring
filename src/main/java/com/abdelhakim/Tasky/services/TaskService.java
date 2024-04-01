@@ -1,12 +1,13 @@
-package com.abdelhakim.Tasky.service;
+package com.abdelhakim.Tasky.services;
 
 import java.util.List;
 
+import com.abdelhakim.Tasky.models.TaskRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.abdelhakim.Tasky.model.Task;
-import com.abdelhakim.Tasky.repository.TaskRepository;
+import com.abdelhakim.Tasky.models.Task;
+import com.abdelhakim.Tasky.repositories.TaskRepository;
 
 @Service
 public class TaskService {
@@ -18,17 +19,23 @@ public class TaskService {
         return taskRepository.findAll();
     }
 
-    public Task createTask(Task task) {
+    public Task getTaskById(Long id) {
+        return taskRepository.findById(id).orElse(null);
+    }
+
+    public Task createTask(TaskRequest taskRequest) {
+        Task task  = new Task();
+        task.setText(taskRequest.getText());
+        task.setCompleted(task.isCompleted());
         return taskRepository.save(task);
     }
 
-    public Task updateTask(Long id, Task task) {
+    public Task updateTask(Long id, TaskRequest taskRequest) {
         if (taskRepository.findById(id).isPresent()){
             Task taskToUpdate = taskRepository.findById(id).get();
-            taskToUpdate.setText(task.getText());
-            taskToUpdate.setCompleted(task.getCompleted());
-            taskRepository.save(task);
-            return taskToUpdate;
+            taskToUpdate.setText(taskRequest.getText());
+            taskToUpdate.setCompleted(taskRequest.isCompleted());
+            return taskRepository.save(taskToUpdate);
         } else {
             return null;
         }

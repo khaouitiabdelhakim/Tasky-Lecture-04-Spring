@@ -1,7 +1,8 @@
-package com.abdelhakim.Tasky.controller;
+package com.abdelhakim.Tasky.controllers;
 
-import com.abdelhakim.Tasky.model.Task;
-import com.abdelhakim.Tasky.service.TaskService;
+import com.abdelhakim.Tasky.models.Task;
+import com.abdelhakim.Tasky.models.TaskRequest;
+import com.abdelhakim.Tasky.services.TaskService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,14 +22,19 @@ public class TaskController {
         return taskService.getAllTasks();
     }
 
+    @GetMapping("/{id}")
+    public Task getTaskById(@PathVariable Long id) {
+        return taskService.getTaskById();
+    }
+
     @PostMapping("/new")
-    public Task createTask(@RequestBody Task task) {
-        return taskService.createTask(task);
+    public Task createTask(@RequestBody TaskRequest taskRequest) {
+        return taskService.createTask(taskRequest);
     }
 
     @PutMapping("/update/{id}")
-    public Task updateTask(@PathVariable Long id, @RequestBody Task task) {
-        return taskService.updateTask(id, task);
+    public Task updateTask(@PathVariable Long id, @RequestBody TaskRequest taskRequest) {
+        return taskService.updateTask(id, taskRequest);
     }
 
     @DeleteMapping("/delete/{id}")
