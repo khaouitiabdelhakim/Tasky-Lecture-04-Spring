@@ -24,7 +24,7 @@ public class TaskController {
 
     @GetMapping("/{id}")
     public Task getTaskById(@PathVariable Long id) {
-        return taskService.getTaskById();
+        return taskService.getTaskById(id);
     }
 
     @PostMapping("/new")
